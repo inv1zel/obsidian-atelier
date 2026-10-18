@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import SlotPicker from '../components/SlotPicker'
+import ClassCar from '../components/ClassCar'
+import Ticket from '../components/Ticket'
 import {
   carClasses, directions, servicesByDir, serviceById,
   priceFor, formatPrice, formatDuration, totalDuration,
@@ -9,6 +11,7 @@ import { addBooking, formatDate } from '../lib/bookings'
 import { downloadIcs } from '../lib/ics'
 
 const STEPS = ['Автомобиль', 'Услуги', 'Дата и время', 'Проверка']
+const HINTS = ['Выберите класс автомобиля', 'Отметьте хотя бы одну услугу', 'Выберите день и время']
 
 export default function Booking() {
   const [params] = useSearchParams()
@@ -28,6 +31,7 @@ export default function Booking() {
   const duration = chosen.length ? totalDuration(chosen) : null
 
   const canNext = [!!cls, picked.length > 0, !!(slot.date && slot.time), true][step]
+  const nextLabel = step === 2 ? 'К проверке' : 'Далее'
   const toggle = (id) => setPicked((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id]))
   const go = (n) => {
     setStep(n)
@@ -79,11 +83,18 @@ export default function Booking() {
               <div className="b-step">
                 <h2 className="h3">Класс автомобиля</h2>
                 <div className="class-cards" role="radiogroup" aria-label="Класс автомобиля">
-                  {carClasses.map((c) => (
+                  {carClasses.map((c, i) => (
                     <button key={c.id} role="radio" aria-checked={cls === c.id} className="class-card" onClick={() => setCls(c.id)}>
-                      <CarIcon type={c.id} />
+                      <span className="class-card__top">
+                        <span className="class-card__num">0{i + 1}</span>
+                        <span className="class-card__check" aria-hidden="true" />
+                      </span>
+                      <ClassCar type={c.id} />
                       <span className="class-card__name">{c.name}</span>
-                      <span className="muted small">{c.hint}</span>
+                      <span className="class-card__hint">{c.hint}</span>
+                      <span className="class-card__from">
+                        Полировка <b>от {formatPrice(priceFor(serviceById('polish'), c.id))}</b>
+                      </span>
                     </button>
                   ))}
                 </div>
@@ -157,16 +168,6 @@ export default function Booking() {
               </div>
             )}
 
-            <div className="b-nav">
-              {step > 0 ? (
-                <button className="btn btn--ghost" onClick={() => go(step - 1)}>Назад</button>
-              ) : <span />}
-              {step < 3 ? (
-                <button className="btn btn--metal" disabled={!canNext} onClick={() => go(step + 1)}>Далее</button>
-              ) : (
-                <button className="btn btn--metal" onClick={confirm}>Подтвердить запись</button>
-              )}
-            </div>
           </div>
 
           <aside className="summary" aria-label="Итог">
@@ -188,57 +189,66 @@ export default function Booking() {
             )}
             <div className="summary__total">
               <span>Итого{!cls && ' (седан)'}</span>
-              <strong>{formatPrice(total)}</strong>
+              <strong>{chosen.length ? formatPrice(total) : '—'}</strong>
             </div>
             {duration && <p className="muted small">Срок работ: {formatDuration(duration)}</p>}
+            <div className="summary__actions">
+              {step > 0 && (
+                <button className="btn btn--ghost" onClick={() => go(step - 1)}>Назад</button>
+              )}
+              {step < 3 ? (
+                <button className="btn btn--metal" disabled={!canNext} onClick={() => go(step + 1)}>{nextLabel}</button>
+              ) : (
+                <button className="btn btn--metal" onClick={confirm}>Подтвердить запись</button>
+              )}
+            </div>
+            {!canNext && step < 3 && <p className="summary__hint">{HINTS[step]}</p>}
             <p className="muted small summary__note">Окончательная цена фиксируется после осмотра и не меняется в процессе работы.</p>
           </aside>
         </div>
       </div>
+
+      {/* мобильная панель итога */}
+      <div className="mbar" role="region" aria-label="Итог и навигация">
+        {step > 0 && (
+          <button className="mbar__back" onClick={() => go(step - 1)} aria-label="Назад">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" strokeWidth="1.5" /></svg>
+          </button>
+        )}
+        <div className="mbar__sum">
+          <strong>{chosen.length ? formatPrice(total) : '—'}</strong>
+          <span>{chosen.length ? `${chosen.length} усл. · ${formatDuration(duration)}` : 'Ничего не выбрано'}</span>
+        </div>
+        {step < 3 ? (
+          <button className="btn btn--metal mbar__next" disabled={!canNext} onClick={() => go(step + 1)}>{nextLabel}</button>
+        ) : (
+          <button className="btn btn--metal mbar__next" onClick={confirm}>Подтвердить</button>
+        )}
+      </div>
     </section>
   )
 }
+
 
 function Done({ booking: b }) {
   return (
     <section className="booking booking--done">
       <div className="container done">
         <div className="done__mark" aria-hidden="true">
-          <svg viewBox="0 0 48 48"><path d="M24 4 42 24 24 44 6 24Z" fill="none" stroke="currentColor" /><path d="M16 24l6 6 10-12" fill="none" stroke="currentColor" strokeWidth="1.6" /></svg>
+          <svg viewBox="0 0 48 48">
+            <path className="done__diamond" pathLength="1" d="M24 4 42 24 24 44 6 24Z" fill="none" stroke="currentColor" />
+            <path className="done__tick" pathLength="1" d="M16 24l6 6 10-12" fill="none" stroke="currentColor" strokeWidth="1.6" />
+          </svg>
         </div>
-        <p className="eyebrow">Запись подтверждена</p>
-        <h1 className="h1">Ждём вас</h1>
-        <p className="lead">{formatDate(b.date)}, {b.time}</p>
-        <div className="done__code">
-          <span className="muted small">Код брони</span>
-          <strong>{b.code}</strong>
-        </div>
-        <p className="muted done__services">
-          {b.serviceIds.map((id) => serviceById(id)?.name).join(' · ')}
-        </p>
+        <p className="eyebrow done__eyebrow">Запись подтверждена</p>
+        <h1 className="h1 done__title">Ждём вас</h1>
+        <Ticket booking={b} />
         <div className="done__actions">
           <Link to="/visits" className="btn btn--metal">Мои визиты</Link>
           <button className="btn btn--ghost" onClick={() => downloadIcs(b)}>Добавить в календарь</button>
         </div>
-        <Link to="/" className="link-arrow small">На главную</Link>
+        <Link to="/" className="link-arrow small done__home">На главную</Link>
       </div>
     </section>
-  )
-}
-
-// простые силуэты для выбора класса
-function CarIcon({ type }) {
-  const paths = {
-    sedan: 'M6 34 C6 30 9 28 14 27 L24 25 C28 19 34 16 42 16 L58 16 C64 16 68 20 72 25 L84 27 C88 28 90 31 90 34 L90 38 L6 38 Z',
-    crossover: 'M6 34 C6 29 9 27 14 26 L22 24 C26 16 32 13 40 13 L64 13 C70 13 74 17 78 24 L85 26 C89 27 90 30 90 34 L90 39 L6 39 Z',
-    suv: 'M6 36 L6 25 C6 22 8 20 12 20 L20 20 L24 10 L76 10 C79 10 81 12 82 15 L86 22 C89 23 90 25 90 28 L90 39 L6 39 Z',
-    super: 'M4 34 C4 31 8 29 16 28 L34 24 C40 20 46 18 54 18 C62 18 70 22 80 27 L88 29 C91 30 92 32 92 34 L92 37 L4 37 Z',
-  }
-  return (
-    <svg className="class-card__icon" viewBox="0 0 96 48" aria-hidden="true">
-      <path d={paths[type]} fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
-      <circle cx="24" cy="39" r="6" fill="var(--bg-2)" stroke="currentColor" strokeWidth="1.3" />
-      <circle cx="72" cy="39" r="6" fill="var(--bg-2)" stroke="currentColor" strokeWidth="1.3" />
-    </svg>
   )
 }
