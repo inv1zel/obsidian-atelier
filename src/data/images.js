@@ -8,7 +8,7 @@ export const images = {
   films: { id: 'photo-1580273916550-e323be2ae537', alt: 'Глянцевый кузов спорткара' },
   interior: { id: 'photo-1503736334956-4c8f8e92946d', alt: 'Кожаный салон автомобиля' },
   options: { id: 'photo-1617814076367-b759c7d7e738', alt: 'Подсветка салона' },
-  diagnostics: { id: 'photo-1520340356584-f9917d1eea6f', alt: 'Осмотр лака в свете ламп' },
+  diagnostics: { local: true, alt: 'Осмотр лака под лампой: в луче видна паутинка царапин' },
   atelier: { id: 'photo-1601362840469-51e4d8d58785', alt: 'Студия ателье' },
   work1: { id: 'photo-1503376780353-7e6692767b70', alt: 'Porsche 911' },
   work2: { id: 'photo-1525609004556-c46c7d6cf023', alt: 'Чёрный внедорожник' },
