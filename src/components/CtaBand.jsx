@@ -10,7 +10,7 @@ export default function CtaBand({ title = 'Начнём с диагностик�
           <p className="muted cta-band__text">{text}</p>
         </div>
         <div className="cta-band__actions">
-          <Link to="/booking?service=diag" className="btn btn--gold">Записаться на диагностику</Link>
+          <Link to="/booking?service=diag" className="btn btn--metal">Записаться на диагностику</Link>
           <Link to="/booking" className="btn btn--ghost">Выбрать услуги</Link>
         </div>
       </Reveal>

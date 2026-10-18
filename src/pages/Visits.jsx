@@ -32,7 +32,7 @@ export default function Visits() {
               <p className="h3">Пока нет ни одной записи</p>
               <p className="muted">Начните с бесплатной диагностики — это час времени и честный взгляд на состояние машины.</p>
               <div className="empty__actions">
-                <Link to="/booking?service=diag" className="btn btn--gold">Записаться на диагностику</Link>
+                <Link to="/booking?service=diag" className="btn btn--metal">Записаться на диагностику</Link>
                 <Link to="/booking" className="btn btn--ghost">Выбрать услуги</Link>
               </div>
             </div>
@@ -122,7 +122,7 @@ function Visit({ b, archived }) {
           <SlotPicker date={slot.date} time={slot.time} onChange={setSlot} ignoreCode={b.code} />
           <div className="visit__panel-foot">
             <button className="btn btn--ghost btn--sm" onClick={() => setMode(null)}>Отмена</button>
-            <button className="btn btn--gold btn--sm" disabled={!slot.date || !slot.time} onClick={saveMove}>
+            <button className="btn btn--metal btn--sm" disabled={!slot.date || !slot.time} onClick={saveMove}>
               Перенести{slot.date && slot.time ? ` на ${formatDate(slot.date, { day: 'numeric', month: 'long' })}, ${slot.time}` : ''}
             </button>
           </div>

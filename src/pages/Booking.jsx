@@ -162,9 +162,9 @@ export default function Booking() {
                 <button className="btn btn--ghost" onClick={() => go(step - 1)}>Назад</button>
               ) : <span />}
               {step < 3 ? (
-                <button className="btn btn--gold" disabled={!canNext} onClick={() => go(step + 1)}>Далее</button>
+                <button className="btn btn--metal" disabled={!canNext} onClick={() => go(step + 1)}>Далее</button>
               ) : (
-                <button className="btn btn--gold" onClick={confirm}>Подтвердить запись</button>
+                <button className="btn btn--metal" onClick={confirm}>Подтвердить запись</button>
               )}
             </div>
           </div>
@@ -217,7 +217,7 @@ function Done({ booking: b }) {
           {b.serviceIds.map((id) => serviceById(id)?.name).join(' · ')}
         </p>
         <div className="done__actions">
-          <Link to="/visits" className="btn btn--gold">Мои визиты</Link>
+          <Link to="/visits" className="btn btn--metal">Мои визиты</Link>
           <button className="btn btn--ghost" onClick={() => downloadIcs(b)}>Добавить в календарь</button>
         </div>
         <Link to="/" className="link-arrow small">На главную</Link>

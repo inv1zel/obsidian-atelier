@@ -98,7 +98,7 @@ export default function CarSide({ color = '#121214', finish = 'gloss', className
               transform={`rotate(${a} ${cx} 196)`}
             />
           ))}
-          <circle cx={cx} cy="196" r="7" fill="#c8b08a" opacity=".8" />
+          <circle cx={cx} cy="196" r="7" fill="#c9ced3" opacity=".7" />
         </g>
       ))}
     </svg>

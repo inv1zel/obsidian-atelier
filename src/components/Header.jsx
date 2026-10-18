@@ -46,7 +46,7 @@ export default function Header() {
             Мои визиты
             {active > 0 && <span className="badge">{active}</span>}
           </NavLink>
-          <Link to="/booking" className="btn btn--gold btn--sm">
+          <Link to="/booking" className="btn btn--metal btn--sm">
             Записаться
           </Link>
           <button
@@ -70,7 +70,7 @@ export default function Header() {
           <NavLink to="/visits" className="mobile-menu__link">
             Мои визиты {active > 0 && <span className="badge">{active}</span>}
           </NavLink>
-          <Link to="/booking" className="btn btn--gold mobile-menu__cta">
+          <Link to="/booking" className="btn btn--metal mobile-menu__cta">
             Записаться
           </Link>
         </nav>

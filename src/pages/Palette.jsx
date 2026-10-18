@@ -61,7 +61,7 @@ export default function Palette() {
               </p>
               <Link
                 to={`/booking?service=color&note=${encodeURIComponent(`${film.name}, ${fin.name.toLowerCase()}`)}`}
-                className="btn btn--gold"
+                className="btn btn--metal"
               >
                 Записаться на оклейку
               </Link>

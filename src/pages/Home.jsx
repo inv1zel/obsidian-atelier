@@ -52,7 +52,7 @@ export default function Home() {
             внимания к каждой детали.
           </p>
           <div className="hero__actions">
-            <Link to="/booking" className="btn btn--gold">Записаться</Link>
+            <Link to="/booking" className="btn btn--metal">Записаться</Link>
             <Link to="/booking?service=diag" className="btn btn--ghost">Бесплатная диагностика</Link>
           </div>
         </div>

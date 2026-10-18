@@ -7,7 +7,7 @@ export default function NotFound() {
         <p className="eyebrow">404</p>
         <h1 className="h1">Здесь <em>пусто</em></h1>
         <p className="lead">Такой страницы нет — но машина, возможно, уже ждёт полировки.</p>
-        <Link to="/" className="btn btn--gold">На главную</Link>
+        <Link to="/" className="btn btn--metal">На главную</Link>
       </div>
     </section>
   )
