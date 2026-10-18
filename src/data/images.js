@@ -9,7 +9,7 @@ export const images = {
   interior: { local: true, alt: 'Салон со стёганой кожей бордового цвета' },
   options: { local: true, alt: 'Салон ночью с красной контурной подсветкой' },
   diagnostics: { local: true, alt: 'Осмотр лака под лампой: в луче видна паутинка царапин' },
-  atelier: { id: 'photo-1601362840469-51e4d8d58785', alt: 'Студия ателье' },
+  atelier: { local: true, alt: 'Тоннель осмотра со световыми рамками и автомобилем' },
   work1: { id: 'photo-1503376780353-7e6692767b70', alt: 'Porsche 911' },
   work2: { id: 'photo-1525609004556-c46c7d6cf023', alt: 'Чёрный внедорожник' },
   work3: { id: 'photo-1549399542-7e3f8b79c341', alt: 'Светлая кожа салона' },

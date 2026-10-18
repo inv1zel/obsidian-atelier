@@ -490,7 +490,7 @@ p { margin: 0 0 14px; }
 .price-table tr:hover .price-table__book { color: var(--steel); }
 
 /* ——— Ателье ——— */
-.wide-photo { aspect-ratio: 21 / 9; border-radius: var(--r); border: 1px solid var(--line); }
+.wide-photo { aspect-ratio: 2 / 1; border-radius: var(--r); border: 1px solid var(--line); }
 .values { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 64px; }
 .value .step__n { display: block; margin-bottom: 18px; }
 .value .h3 { font-size: 24px; margin-bottom: 10px; }
