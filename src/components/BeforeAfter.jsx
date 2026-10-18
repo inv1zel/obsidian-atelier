@@ -1,7 +1,8 @@
 import { useCallback, useRef, useState } from 'react'
 import Photo from './Photo'
+import { imageSrc } from '../data/images'
 
-// Слайдер «до / после». «До» — тот же кадр с тусклым лаком и паутинкой царапин.
+// Слайдер «до / после». «До» — отдельный кадр <key>-before.jpg с дефектами под услугу.
 export default function BeforeAfter({ image, label }) {
   const [pos, setPos] = useState(50)
   const box = useRef(null)
@@ -33,8 +34,7 @@ export default function BeforeAfter({ image, label }) {
     >
       <Photo k={image} className="ba__after" />
       <div className="ba__before" aria-hidden="true">
-        <Photo k={image} />
-        <span className="ba__swirls" />
+        <img src={imageSrc(`${image}-before`)} alt="" loading="lazy" decoding="async" />
       </div>
       <span className="ba__tag ba__tag--l">До</span>
       <span className="ba__tag ba__tag--r">После</span>

@@ -402,14 +402,7 @@ p { margin: 0 0 14px; }
 .ba { position: relative; aspect-ratio: 16 / 10; border-radius: var(--r); overflow: hidden; border: 1px solid var(--line); user-select: none; touch-action: pan-y; cursor: ew-resize; }
 .ba .photo { position: absolute; inset: 0; }
 .ba__before { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
-.ba__before .photo { filter: saturate(.45) brightness(.72) contrast(.82) sepia(.12); }
-.ba__swirls {
-  position: absolute; inset: 0; mix-blend-mode: screen; opacity: .5;
-  background:
-    repeating-radial-gradient(circle at 30% 40%, transparent 0 9px, rgba(255,255,255,.07) 10px, transparent 11px),
-    repeating-radial-gradient(circle at 72% 62%, transparent 0 13px, rgba(255,255,255,.06) 14px, transparent 15px),
-    linear-gradient(180deg, rgba(160,150,130,.18), rgba(60,55,50,.25));
-}
+.ba__before img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .ba__handle { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 1px; background: rgba(255,255,255,.85); transform: translateX(-.5px); }
 .ba__knob {
   position: absolute; top: 50%; left: 50%; width: 52px; height: 52px; margin: -26px 0 0 -26px;
