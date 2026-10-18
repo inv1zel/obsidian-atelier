@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import PageHead from '../components/PageHead'
-import Photo from '../components/Photo'
+import AtelierScene from '../components/AtelierScene'
 import Reveal from '../components/Reveal'
 import CtaBand from '../components/CtaBand'
 
@@ -45,7 +45,7 @@ export default function Atelier() {
       <section className="section section--tight">
         <div className="container">
           <Reveal>
-            <Photo k="atelier" className="wide-photo" />
+            <AtelierScene />
           </Reveal>
           <div className="values">
             {values.map((v, i) => (

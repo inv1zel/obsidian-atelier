@@ -1024,3 +1024,61 @@ body::after {
 @media (max-width: 960px) {
   .mbar { display: flex; }
 }
+
+/* ============ Живое ателье ============ */
+.atelier-scene { position: relative; overflow: hidden; container-type: size; background: #070708; }
+.atelier-scene__stage {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: max(100cqw, calc(100cqh * 1.5005)); aspect-ratio: 1400 / 933;
+}
+.atelier-scene__stage > * { position: absolute; }
+.atelier-scene__off, .atelier-scene__lit { inset: 0; width: 100%; height: 100%; display: block; }
+/* свет включается волной из глубины тоннеля */
+.atelier-scene__lit {
+  opacity: 0;
+  -webkit-mask: radial-gradient(closest-side, #000 55%, transparent 100%) 50% 52% / 0% 0% no-repeat;
+  mask: radial-gradient(closest-side, #000 55%, transparent 100%) 50% 52% / 0% 0% no-repeat;
+}
+.is-on .atelier-scene__lit { animation: tunnelOn 1.9s cubic-bezier(.55,.05,.4,1) .2s forwards, tunnelBreathe 7s ease-in-out 4s infinite; }
+@keyframes tunnelOn {
+  0% { opacity: 0; -webkit-mask-size: 0% 0%; mask-size: 0% 0%; }
+  10% { opacity: 1; }
+  16% { opacity: .2; }
+  24% { opacity: 1; }
+  30% { opacity: .5; }
+  38% { opacity: 1; }
+  100% { opacity: 1; -webkit-mask-size: 420% 420%; mask-size: 420% 420%; }
+}
+@keyframes tunnelBreathe {
+  0%, 100% { opacity: 1; -webkit-mask-size: 420% 420%; mask-size: 420% 420%; }
+  50% { opacity: .9; -webkit-mask-size: 420% 420%; mask-size: 420% 420%; }
+}
+/* фары: двойное моргание при «снятии с охраны», затем горят и иногда моргают снова */
+.atelier-scene__lamp {
+  transform: translate(-50%, -50%); opacity: 0; mix-blend-mode: screen; pointer-events: none;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(255,252,240,1), rgba(255,236,200,.55) 35%, rgba(255,230,190,0) 70%);
+  filter: blur(2px);
+}
+.atelier-scene__floor {
+  left: 50%; top: 82%; width: 60%; height: 26%; transform: translate(-50%, -50%); opacity: 0;
+  mix-blend-mode: screen; pointer-events: none;
+  background: radial-gradient(50% 50% at 50% 40%, rgba(255,236,205,.28), rgba(255,236,205,0) 70%);
+}
+.is-on .atelier-scene__lamp, .is-on .atelier-scene__floor { animation: lampsUnlock 1.6s 2.2s forwards, lampsFlash 9s 7s infinite; }
+@keyframes lampsUnlock {
+  0% { opacity: 0; } 8% { opacity: 1; } 18% { opacity: 0; }
+  30% { opacity: 1; } 40% { opacity: 0; }
+  70% { opacity: 0; } 100% { opacity: .85; }
+}
+@keyframes lampsFlash {
+  0%, 88% { opacity: .85; }
+  89.5% { opacity: 1.2; filter: blur(2px) brightness(1.6); }
+  91% { opacity: .2; }
+  92.5% { opacity: 1.2; filter: blur(2px) brightness(1.6); }
+  94% { opacity: .2; }
+  97%, 100% { opacity: .85; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .atelier-scene__lit { opacity: 1; -webkit-mask: none; mask: none; }
+  .atelier-scene__lamp, .atelier-scene__floor { opacity: .85; }
+}
