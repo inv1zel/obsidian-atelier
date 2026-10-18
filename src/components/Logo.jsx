@@ -1,4 +1,5 @@
-export default function Logo({ small }) {
+export default function Logo({ small, wordmark }) {
+  if (wordmark) return <span className="logo logo--wordmark"><span className="logo__word">OBSIDIAN</span></span>
   return (
     <span className={`logo ${small ? 'logo--small' : ''}`}>
       <svg viewBox="0 0 24 24" aria-hidden="true">

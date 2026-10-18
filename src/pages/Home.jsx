@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Photo from '../components/Photo'
+import Hero from '../components/Hero'
 import Reveal from '../components/Reveal'
 import BeforeAfter from '../components/BeforeAfter'
 import CarSide from '../components/CarSide'
@@ -39,25 +40,7 @@ export default function Home() {
 
   return (
     <>
-      <section className="hero">
-        <Photo k="hero" className="hero__photo" eager />
-        <div className="hero__veil" />
-        <div className="container hero__content">
-          <p className="eyebrow hero__eyebrow">Ателье детейлинга · с 2014 года</p>
-          <h1 className="hero__title">
-            Защита.<br />Цвет.<br /><em>Свет.</em>
-          </h1>
-          <p className="lead hero__lead">
-            Полировка, керамика, плёнки, салон и опции для автомобилей, которые заслуживают
-            внимания к каждой детали.
-          </p>
-          <div className="hero__actions">
-            <Link to="/booking" className="btn btn--metal">Записаться</Link>
-            <Link to="/booking?service=diag" className="btn btn--ghost">Бесплатная диагностика</Link>
-          </div>
-        </div>
-        <div className="hero__scroll" aria-hidden="true"><span /></div>
-      </section>
+      <Hero />
 
       <section className="stats">
         <div className="container stats__grid">

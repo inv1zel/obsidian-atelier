@@ -32,7 +32,7 @@ export default function Header() {
     <header className={`header ${scrolled || open ? 'header--solid' : ''} ${open ? 'header--open' : ''}`}>
       <div className="container header__row">
         <Link to="/" className="header__logo" aria-label="OBSIDIAN — на главную">
-          <Logo />
+          <Logo wordmark />
         </Link>
         <nav className="header__nav" aria-label="Основная навигация">
           {nav.map((n) => (
@@ -46,8 +46,8 @@ export default function Header() {
             Мои визиты
             {active > 0 && <span className="badge">{active}</span>}
           </NavLink>
-          <Link to="/booking" className="btn btn--metal btn--sm">
-            Записаться
+          <Link to="/booking" className="header__cta">
+            Записаться на сервис
           </Link>
           <button
             className="burger"

@@ -8,7 +8,8 @@ await mkdir(dir, { recursive: true })
 const force = process.argv.includes('--force')
 
 let ok = 0
-for (const [key, { id }] of Object.entries(images)) {
+for (const [key, { id, local }] of Object.entries(images)) {
+  if (local) { ok++; console.log(`· ${key} — локальный файл`); continue }
   const file = new URL(`${key}.jpg`, dir)
   if (!force) {
     try { await access(file); ok++; console.log(`· ${key} — уже есть`); continue } catch {}
