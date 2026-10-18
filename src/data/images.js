@@ -10,11 +10,11 @@ export const images = {
   options: { local: true, alt: 'Салон ночью с красной контурной подсветкой' },
   diagnostics: { local: true, alt: 'Осмотр лака под лампой: в луче видна паутинка царапин' },
   atelier: { local: true, alt: 'Тоннель осмотра со световыми рамками и автомобилем' },
-  work1: { id: 'photo-1503376780353-7e6692767b70', alt: 'Porsche 911' },
-  work2: { id: 'photo-1525609004556-c46c7d6cf023', alt: 'Чёрный внедорожник' },
-  work3: { id: 'photo-1549399542-7e3f8b79c341', alt: 'Светлая кожа салона' },
-  work4: { id: 'photo-1555215695-3004980ad54e', alt: 'BMW в графите' },
-  work5: { id: 'photo-1614162692292-7ac56d7f7f1e', alt: 'Салон с подсветкой' },
+  work1: { local: true, alt: 'Чёрный Porsche 911 в студии' },
+  work2: { local: true, alt: 'Чёрный Mercedes-AMG G 63 в студии' },
+  work3: { local: true, alt: 'Светлая кожа сиденья с волнистой стёжкой' },
+  work4: { local: true, alt: 'BMW M5 в матовом графите' },
+  work5: { local: true, alt: 'Салон Porsche Cayenne ночью' },
   work6: { id: 'photo-1583121274602-3e2820c69888', alt: 'Суперкар' },
 }
 
