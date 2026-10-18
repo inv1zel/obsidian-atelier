@@ -1,0 +1,21 @@
+// Вымышленные кейсы. image — ключ из src/data/images.js
+export const works = [
+  { id: 'gt3', car: 'Porsche 911 GT3', dir: 'films', title: 'Сатиновый PPF на весь кузов',
+    text: 'Заводской «Shark Blue» под сатиновой плёнкой: цвет стал глубже, а кузов — защищён от трека.',
+    days: 6, image: 'work1' },
+  { id: 'g63', car: 'Mercedes-AMG G 63', dir: 'body', title: 'Полировка и керамика',
+    text: 'Чёрный лак после трёх зим. Убрали голограммы и паутинку, закрепили двумя слоями керамики.',
+    days: 3, image: 'work2' },
+  { id: 'rr', car: 'Range Rover', dir: 'interior', title: 'Реставрация светлой кожи',
+    text: 'Кремовая кожа водительского сиденья: потёртости, трещины и следы джинсов ушли без перетяжки.',
+    days: 2, image: 'work3' },
+  { id: 'm5', car: 'BMW M5', dir: 'films', title: 'Оклейка в «Midnight Graphite»',
+    text: 'Белый кузов сменил цвет на матовый графит. Проёмы оклеены, следов прошлого цвета не видно.',
+    days: 5, image: 'work4' },
+  { id: 'cayenne', car: 'Porsche Cayenne', dir: 'options', title: 'Звёздное небо и подсветка',
+    text: '640 точек в потолке и контурная подсветка с управлением из штатного меню.',
+    days: 4, image: 'work5' },
+  { id: 'huracan', car: 'Lamborghini Huracán', dir: 'body', title: 'Подготовка к продаже',
+    text: 'Полный детейлинг: мойка, полировка, салон, диски. Машина ушла новому владельцу через неделю.',
+    days: 3, image: 'work6' },
+]
