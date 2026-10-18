@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import Photo from './Photo'
+import HeroScene from './HeroScene'
 import Arrow from './Arrow'
 
 const slides = [
@@ -50,7 +50,7 @@ export default function Hero() {
       onMouseLeave={() => setPaused(false)}
       aria-roledescription="карусель"
     >
-      <Photo k="hero" className="hero__photo" eager />
+      <HeroScene />
       <div className="hero__veil" />
 
       <div className="container hero__content">

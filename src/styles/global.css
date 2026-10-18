@@ -165,9 +165,45 @@ p { margin: 0 0 14px; }
 
 /* ============ Hero ============ */
 .hero { position: relative; min-height: 100svh; display: flex; align-items: center; padding: 120px 0 150px; overflow: hidden; }
-.hero__photo { position: absolute; inset: 0; }
-.hero__photo img { object-position: 68% 50%; animation: heroZoom 20s ease-out both; }
-@keyframes heroZoom { from { transform: scale(1.07); } to { transform: scale(1); } }
+/* ——— живая сцена ——— */
+.scene { position: absolute; inset: 0; overflow: hidden; background: #070809; }
+.scene__stage { position: absolute; will-change: transform; }
+.scene__inner { position: absolute; inset: 0; transform-origin: 68% 55%; animation: heroZoom 24s ease-out both; }
+@keyframes heroZoom { from { transform: scale(1.08); } to { transform: scale(1); } }
+.scene__img { width: 100%; height: 100%; display: block; animation: sceneIn 1.6s ease-out both; }
+@keyframes sceneIn { from { opacity: 0; filter: brightness(.4); } }
+.scene__inner > span { position: absolute; pointer-events: none; mix-blend-mode: screen; }
+.scene__led {
+  width: 1.4%; transform: translateX(-50%);
+  background: radial-gradient(50% 50% at 50% 50%, rgba(255,246,228,.55), rgba(255,240,215,0));
+  filter: blur(6px); animation: ledBreathe 5.5s ease-in-out infinite;
+}
+@keyframes ledBreathe { 0%, 100% { opacity: .25; } 50% { opacity: .85; } }
+.scene__lamp {
+  transform: translate(-50%, -50%); opacity: 0;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(235,244,255,.95), rgba(200,222,255,.35) 40%, rgba(200,222,255,0) 72%);
+  filter: blur(3px);
+  animation: lampIgnite 1.4s .9s steps(1) forwards, lampBreathe 6s 2.4s ease-in-out infinite;
+}
+.scene__lamp--r { animation-delay: 1s, 2.5s; }
+@keyframes lampIgnite { 0% { opacity: 0; } 12% { opacity: .9; } 22% { opacity: .15; } 34% { opacity: 1; } 44% { opacity: .4; } 56%, 100% { opacity: .95; } }
+@keyframes lampBreathe { 0%, 100% { opacity: .95; } 50% { opacity: .7; } }
+.scene__floor {
+  transform: translate(-50%, -50%); opacity: 0;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(210,225,245,.16), rgba(210,225,245,0) 70%);
+  animation: floorOn 1.6s 1.6s ease-out forwards;
+}
+@keyframes floorOn { to { opacity: 1; } }
+.scene__sweep {
+  inset: 0;
+  background: linear-gradient(105deg, transparent 38%, rgba(255,255,255,.9) 47%, rgba(255,255,255,1) 50%, rgba(255,255,255,.9) 53%, transparent 62%) no-repeat;
+  background-size: 60% 100%; background-position: -80% 0;
+  mask-size: 100% 100%; -webkit-mask-size: 100% 100%; mask-mode: luminance;
+  animation: sweep2 9s 3s ease-in-out infinite;
+}
+@keyframes sweep2 { 0% { background-position: -80% 0; } 45%, 100% { background-position: 180% 0; } }
+.scene__dust { position: absolute; inset: 0; pointer-events: none; }
+.app--behind .scene__inner, .app--behind .scene__inner *, .app--behind .scene__img { animation-play-state: paused; }
 .hero__veil {
   position: absolute; inset: 0;
   background:
@@ -669,8 +705,7 @@ p { margin: 0 0 14px; }
   .header__cta { display: none; }
   .logo--wordmark .logo__word { font-size: 16px; letter-spacing: .36em; }
   .hero { align-items: flex-end; padding-bottom: 110px; }
-  .hero__photo { inset: 0 0 auto 0; height: 66%; }
-  .hero__photo img { object-position: 56% 50%; }
+  .scene { inset: 0 0 auto 0; height: 66%; }
   .hero__veil { background: linear-gradient(0deg, var(--bg) 34%, rgba(11,12,13,.55) 48%, rgba(11,12,13,0) 64%), linear-gradient(180deg, rgba(7,8,9,.7), transparent 18%); }
   .hero__eyebrow { font-size: 10px; letter-spacing: .26em; margin-bottom: 20px; }
   .hero__lead { font-size: 14px; margin: 20px 0 32px; }
