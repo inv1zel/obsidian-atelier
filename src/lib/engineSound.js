@@ -5,6 +5,7 @@ export function playEngineStart() {
   const AC = window.AudioContext || window.webkitAudioContext
   if (!AC) return () => {}
   const ctx = new AC()
+  ctx.resume?.()
   const t0 = ctx.currentTime + 0.05
 
   const master = ctx.createGain()

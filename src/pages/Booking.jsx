@@ -7,7 +7,7 @@ import {
   carClasses, directions, servicesByDir, serviceById,
   priceFor, formatPrice, formatDuration, totalDuration,
 } from '../data/services'
-import { addBooking, formatDate } from '../lib/bookings'
+import { addBooking, formatDate, slotState } from '../lib/bookings'
 import { downloadIcs } from '../lib/ics'
 
 const STEPS = ['Автомобиль', 'Услуги', 'Дата и время', 'Проверка']
@@ -25,6 +25,7 @@ export default function Booking() {
   const [slot, setSlot] = useState({ date: null, time: null })
   const [comment, setComment] = useState(params.get('note') ?? '')
   const [done, setDone] = useState(null)
+  const [slotLost, setSlotLost] = useState(false)
 
   const chosen = useMemo(() => picked.map(serviceById), [picked])
   const total = chosen.reduce((s, x) => s + priceFor(x, cls ?? 'sedan'), 0)
@@ -39,6 +40,12 @@ export default function Booking() {
   }
 
   const confirm = () => {
+    if (slotState(slot.date, slot.time) !== 'free') {
+      setSlot({ date: null, time: null })
+      setSlotLost(true)
+      go(2)
+      return
+    }
     const b = addBooking({
       classId: cls,
       car: car.trim(),
@@ -140,7 +147,10 @@ export default function Booking() {
                 <p className="muted small">
                   Это время приёма автомобиля. {duration?.d ? `Работы займут ${formatDuration(duration)} — машина останется в ателье.` : ''}
                 </p>
-                <SlotPicker date={slot.date} time={slot.time} onChange={setSlot} />
+                {slotLost && (
+                  <p className="notice" role="alert">Выбранное время уже недоступно — пожалуйста, выберите другое.</p>
+                )}
+                <SlotPicker date={slot.date} time={slot.time} onChange={(v) => { setSlot(v); setSlotLost(false) }} />
               </div>
             )}
 

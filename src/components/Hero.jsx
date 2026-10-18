@@ -46,8 +46,8 @@ export default function Hero() {
   return (
     <section
       className="hero"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
+      onPointerEnter={(e) => e.pointerType === 'mouse' && setPaused(true)}
+      onPointerLeave={(e) => e.pointerType === 'mouse' && setPaused(false)}
       aria-roledescription="карусель"
     >
       <HeroScene />

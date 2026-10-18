@@ -14,6 +14,17 @@ import Booking from './pages/Booking'
 import Visits from './pages/Visits'
 import NotFound from './pages/NotFound'
 
+const TITLES = {
+  '/': '',
+  '/services': 'Услуги',
+  '/works': 'Работы',
+  '/palette': 'Палитра плёнок',
+  '/prices': 'Цены',
+  '/atelier': 'Ателье',
+  '/booking': 'Запись',
+  '/visits': 'Мои визиты',
+}
+
 const seenIntro = () => {
   try {
     return sessionStorage.getItem(INTRO_KEY) === '1'
@@ -24,10 +35,15 @@ const seenIntro = () => {
 
 export default function App() {
   const [intro, setIntro] = useState(() => !seenIntro())
-  const { pathname } = useLocation()
+  const { pathname, key } = useLocation()
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [pathname])
+
+  useEffect(() => {
+    const t = TITLES[pathname] ?? (pathname.startsWith('/services/') ? 'Услуги' : 'Страница не найдена')
+    document.title = t ? `${t} — OBSIDIAN` : 'OBSIDIAN — ателье детейлинга'
   }, [pathname])
 
   return (
@@ -44,7 +60,7 @@ export default function App() {
             <Route path="/palette" element={<Palette />} />
             <Route path="/prices" element={<Prices />} />
             <Route path="/atelier" element={<Atelier />} />
-            <Route path="/booking" element={<Booking />} />
+            <Route path="/booking" element={<Booking key={key} />} />
             <Route path="/visits" element={<Visits />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

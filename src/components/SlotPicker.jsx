@@ -15,7 +15,7 @@ export default function SlotPicker({ date, time, onChange, ignoreCode }) {
     })
   }, [])
 
-  const activeDate = date ?? days.find((d) => dayHasFree(d, ignoreCode))
+  const activeDate = date ?? days.find((d) => dayHasFree(d, ignoreCode)) ?? days[0]
   const month = fromISO(activeDate).toLocaleDateString('ru-RU', { month: 'long', year: 'numeric' })
 
   return (
