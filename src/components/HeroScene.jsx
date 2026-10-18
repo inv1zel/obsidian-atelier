@@ -138,17 +138,21 @@ export default function HeroScene() {
       <div className="scene__stage" ref={stage}>
         <div className="scene__inner">
           <img src={src} alt={images.hero.alt} className="scene__img" />
-          {/* LED-полоса на стене */}
-          <span className="scene__led" style={{ left: '60.3%', top: '10%', height: '44.5%' }} />
+          {/* LED-лампа на стене: ровный свет, иногда мерцает.
+              Все слои внутри .scene__tube анимируются синхронно */}
+          <span className="scene__dim">
+            <span className="scene__dim-glow" />
+            <span className="scene__dim-strip" style={{ left: '60.3%', top: '9%', height: '46.5%' }} />
+          </span>
+          <span className="scene__tube">
+            <img src={src} alt="" className="scene__relight" />
+            <span className="scene__spill" />
+            <span className="scene__led" style={{ left: '60.3%', top: '10%', height: '44.5%' }} />
+          </span>
           {/* фары: свечение и отсвет на полу */}
           <span className="scene__lamp" style={{ left: '53.1%', top: '59.2%', width: '9%', height: '7.5%' }} />
           <span className="scene__lamp scene__lamp--r" style={{ left: '75.6%', top: '59%', width: '4.2%', height: '6.5%' }} />
           <span className="scene__floor" style={{ left: '66%', top: '83%', width: '46%', height: '22%' }} />
-          {/* блик по отражающим поверхностям — маска по яркости кадра */}
-          <span
-            className="scene__sweep"
-            style={{ WebkitMaskImage: `url(${src})`, maskImage: `url(${src})` }}
-          />
         </div>
       </div>
       <canvas className="scene__dust" ref={canvas} />
