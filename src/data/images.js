@@ -5,7 +5,7 @@
 export const images = {
   hero: { local: true, alt: 'Чёрный спорткар в студии ателье OBSIDIAN' },
   body: { local: true, alt: 'Полировка капота машинкой' },
-  films: { id: 'photo-1580273916550-e323be2ae537', alt: 'Глянцевый кузов спорткара' },
+  films: { local: true, alt: 'Нанесение защитной плёнки на капот' },
   interior: { id: 'photo-1503736334956-4c8f8e92946d', alt: 'Кожаный салон автомобиля' },
   options: { id: 'photo-1617814076367-b759c7d7e738', alt: 'Подсветка салона' },
   diagnostics: { local: true, alt: 'Осмотр лака под лампой: в луче видна паутинка царапин' },
