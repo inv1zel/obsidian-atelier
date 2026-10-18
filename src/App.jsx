@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Intro, { INTRO_KEY } from './components/Intro'
+import ErrorBoundary from './components/ErrorBoundary'
 import Home from './pages/Home'
 import Services from './pages/Services'
 import Direction from './pages/Direction'
@@ -52,6 +53,7 @@ export default function App() {
       <div className={`app ${intro ? 'app--behind' : ''}`} aria-hidden={intro || undefined}>
         <Header />
         <main>
+          <ErrorBoundary resetKey={pathname}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/services" element={<Services />} />
@@ -64,6 +66,7 @@ export default function App() {
             <Route path="/visits" element={<Visits />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          </ErrorBoundary>
         </main>
         <Footer />
       </div>

@@ -23,7 +23,7 @@ export default function Booking() {
   const [car, setCar] = useState('')
   const [picked, setPicked] = useState(preService ? [preService.id] : [])
   const [slot, setSlot] = useState({ date: null, time: null })
-  const [comment, setComment] = useState(params.get('note') ?? '')
+  const [comment, setComment] = useState(() => (params.get('note') ?? '').replace(/[\u0000-\u001f\u007f<>]/g, '').slice(0, 120))
   const [done, setDone] = useState(null)
   const [slotLost, setSlotLost] = useState(false)
 
