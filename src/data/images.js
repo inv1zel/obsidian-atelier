@@ -15,7 +15,7 @@ export const images = {
   work3: { local: true, alt: 'Светлая кожа сиденья с волнистой стёжкой' },
   work4: { local: true, alt: 'BMW M5 в матовом графите' },
   work5: { local: true, alt: 'Салон Porsche Cayenne ночью' },
-  work6: { id: 'photo-1583121274602-3e2820c69888', alt: 'Суперкар' },
+  work6: { local: true, alt: 'Матовый чёрный Lamborghini Huracán в студии' },
 }
 
 export const imageSrc = (key) => `${import.meta.env.BASE_URL}images/${key}.jpg`
